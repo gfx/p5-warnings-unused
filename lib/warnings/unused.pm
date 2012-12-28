@@ -26,7 +26,7 @@ __END__
 
 =head1 NAME
 
-warnings::unused - Produces warnings when unused variables are detected
+warnings::unused - Produces warnings when unused variables are detected (DEPRECATED)
 
 =head1 VERSION
 
@@ -59,6 +59,8 @@ This document describes warnings::unused version 0.04.
 	# perl -Mwarnings::unused=-global -e 'use Foo'
 
 =head1 DESCRIPTION
+
+B<< THIS MODULE HAS BEEN DEPRECATED. USE Test::Vars INSTEAD. >>
 
 This pragmatic module extends lexical warnings to complain about unused
 variables.
