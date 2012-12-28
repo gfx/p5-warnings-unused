@@ -3,6 +3,9 @@ Revision history for warnings::unused
 TODO:
 	* to be based on PL_peepp?
 
+NEXT
+	- Deprecate this module. Use Test::Vars instead.
+
 0.04 Sun Mar  1 11:29:06 2009
 	- fix RT #43716, reported by Kevin Ryde
 
