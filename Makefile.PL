@@ -4,11 +4,9 @@ use warnings;
 use inc::Module::Install;
 use Module::Install::XSUtil;
 
-name 'warnings-unused';
+all_from 'lib/warnings/unused.pm';
 
 use_ppport;
-
-all_from 'lib/warnings/unused.pm';
 
 requires 'XSLoader'   => 0.06;
 

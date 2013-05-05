@@ -9,8 +9,8 @@ warnings-unused-*
 Makefile*
 !Makefile.PL
 *blib
-META.yml
-MYMETA.yml
+META.*
+MYMETA.*
 inc/
 MANIFEST
 *.out
