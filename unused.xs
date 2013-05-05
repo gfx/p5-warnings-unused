@@ -1,4 +1,4 @@
-/* unused.xs */
+/* warnings-unused/unused.xs */
 
 /*
 See also:
@@ -25,8 +25,9 @@ See also:
 
 /* Since these APIs are not public, the definitions are a little complicated */
 
-#if PERL_BCDVERSION >= 0x5010000
-#	undef  PL_tokenbuf /* defined by ppport.h */
+#if  PERL_BCDVERSION >= 0x5010000
+#	undef  PL_tokenbuf /* defined in ppport.h */
+#   undef  PL_in_my    /* defined in ppport.h */
 #	define PL_tokenbuf (PL_parser->tokenbuf)
 #	define PL_in_my    (PL_parser->in_my)
 #else
@@ -98,14 +99,20 @@ wl_scope_enabled(pTHX_ pMY_CXT){
 		return TRUE;
 	}
 
-#if PERL_BCDVERSION >= 0x5010000
+#if   PERL_BCDVERSION >= 0x5014000
+	if(PL_curcop->cop_hints_hash){
+		SV* const sv = Perl_refcounted_he_fetch_pvn(aTHX_
+				PL_curcop->cop_hints_hash,
+				HINT_KEY, sizeof(HINT_KEY)-1, 0U, 0);
+		return sv && SvTRUE(sv);
+	}
+#elif PERL_BCDVERSION >= 0x5010000
 	if(PL_curcop->cop_hints_hash){
 		SV* const sv = Perl_refcounted_he_fetch(aTHX_
 				PL_curcop->cop_hints_hash, Nullsv,
 				HINT_KEY, sizeof(HINT_KEY)-1, FALSE, 0);
 		return sv && SvTRUE(sv);
 	}
-
 #else
 	/* XXX: It may not work with other modules that use HINT_LOCALIZE_HH */
 	if(PL_hints & HINT_LOCALIZE_HH){
@@ -129,7 +136,7 @@ static HV*
 wl_push_scope(pTHX_ pMY_CXT_ UV const key){
 	HV* const hv = newHV();
 
-	hv_store_ent(hv, MY_CXT.scope_depth, newSVuv(key), MY_CXT.scope_depth_hash);
+	(void)hv_store_ent(hv, MY_CXT.scope_depth, newSVuv(key), MY_CXT.scope_depth_hash);
 	av_push(MY_CXT.vars, newRV_noinc((SV*)hv));
 
 	return hv;
@@ -246,7 +253,7 @@ wl_ck_padany(pTHX_ OP* const o){
 				msg = &PL_sv_undef; /* marks but doesn't complain about it */
 			}
 
-			hv_store(hv, name, namelen, msg, 0U);
+			(void)hv_store(hv, name, namelen, msg, 0U);
 		}
 		/* use */
 		else{
