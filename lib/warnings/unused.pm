@@ -60,8 +60,10 @@ This document describes warnings::unused version 0.04.
 
 =head1 DESCRIPTION
 
+B<Note:> The author no longer maintain this module. Consider L<Test::Vars> if you detect unused vars as a unit test.
+
 This pragmatic module extends lexical warnings to complain about unused
-variables. Consider L<Test::Vars> if you detect unused vars as a unit test.
+variables.
 
 It produces warnings when a C<my> variable or C<state> variable is unused aside
 from its declaration.
@@ -133,16 +135,6 @@ To avoid unexpected warnings, you can use the C<no warnings 'once'> directive.
 =head1 DEPENDENCIES
 
 Perl 5.8.1 or later, and a C compiler.
-
-=head1 BUGS
-
-There might be bugs.
-
-Please report any bugs or feature requests to
-C<bug-warnings-unused@rt.cpan.org/>, or through the web interface at
-L<http://rt.cpan.org/>.
-
-Patches are welcome.
 
 =head1 SEE ALSO
 
